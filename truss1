@@ -1,0 +1,56 @@
+**   CCX 2.9 
+**   Truss for assignment for dt088/087
+**   Test objective: T3D2 elements.
+**
+*NODE,NSET=Nall
+1,	0,	2,
+2,	0,	0,
+3,	2,	2,
+4,	2,	0,
+5,	4,	2,
+6,	4,	0,
+
+
+
+
+*ELEMENT,TYPE=T3D2,ELSET=EAll
+1,	3,	4
+2,	1,	3
+3,	2,	3
+4,	1,	2
+5,	2,	4
+6,	1,	4
+7,	4,	5
+8,	3,	6
+9,	5,	6
+10,	4,	6
+11,     3,      5
+
+*NSET, NSET=FIX
+2,6
+*BOUNDARY
+FIX,1,3
+Nall,3,3
+
+
+*MATERIAL,NAME=STEEL
+*ELASTIC
+2e11,.3
+*SOLID SECTION,ELSET=EAll,MATERIAL=STEEL
+1e-2
+
+*STEP
+*STATIC
+*CLOAD
+1,2,-1e3
+3,2,-1e3
+5,2,-1e3
+
+
+*EL PRINT,ELSET=Eall
+S
+*NODE FILE,OUTPUT=3D
+U
+*EL FILE
+S
+*END STEP
